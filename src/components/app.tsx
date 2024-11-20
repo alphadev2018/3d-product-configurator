@@ -1,10 +1,13 @@
 import { h } from 'preact';
 
+import Configurator from '../components/Configurator';
 import { AppProvider } from '../contexts/app';
 
 const App = () => (
   <div id="app">
-    <AppProvider>Content</AppProvider>
+    <AppProvider>
+      <Configurator />
+    </AppProvider>
   </div>
 );
 
