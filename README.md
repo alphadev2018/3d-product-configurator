@@ -47,6 +47,7 @@ This is a basic 3D Product Configurator using Preact and Three.js that allows us
 
 - Open the application in your browser.
 - Drag the mouse over the scene to rotate the 3D model.
+  ![image](https://github.com/user-attachments/assets/ad599978-7968-4a81-9d2d-070a0db029c2)
 - Use the slider at the bottom left to zoom in or out the 3D model.
   ![image](https://github.com/user-attachments/assets/2ed65d55-9e96-4b09-ae1e-cf6fc38d609a)
 - Use the color picker at the bottom right to change the color of the 3D model.
