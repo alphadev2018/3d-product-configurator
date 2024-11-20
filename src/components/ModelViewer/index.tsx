@@ -1,6 +1,7 @@
 import { h, FunctionComponent } from 'preact';
 import { useRef, useEffect, useCallback } from 'preact/hooks';
 import { useSignal } from '@preact/signals';
+import invert from 'invert-color';
 import * as THREE from 'three';
 
 import { useApp } from '../../contexts/app';
@@ -17,6 +18,7 @@ const ModelViewer: FunctionComponent = () => {
   const previousMousePosition = useRef({ x: 0, y: 0 });
   const renderer = useRef<THREE.WebGLRenderer | null>(null);
   const cubeRef = useRef<THREE.Mesh | null>(null);
+  const edgesRef = useRef<THREE.LineSegments | null>(null);
 
   // Function to handle window resize
   const handleResize = useCallback(() => {
@@ -111,7 +113,15 @@ const ModelViewer: FunctionComponent = () => {
     const cube = new THREE.Mesh(geometry, material);
     cubeRef.current = cube;
 
+    const edges = new THREE.EdgesGeometry(geometry);
+    const edgeMaterial = new THREE.LineBasicMaterial({
+      color: invert(color.value),
+    }); // Inverted color
+    const edgeLines = new THREE.LineSegments(edges, edgeMaterial);
+    edgesRef.current = edgeLines;
+
     scene.value.add(cube);
+    scene.value.add(edgeLines);
 
     const animate = () => {
       requestAnimationFrame(animate);
@@ -148,6 +158,10 @@ const ModelViewer: FunctionComponent = () => {
         ((child as THREE.Mesh).material as THREE.MeshBasicMaterial).color.set(
           color.value,
         );
+      } else if ((child as THREE.LineSegments).isLineSegments) {
+        (
+          (child as THREE.LineSegments).material as THREE.LineBasicMaterial
+        ).color.set(invert(color.value));
       }
     });
   }, [color.value]);
@@ -156,12 +170,19 @@ const ModelViewer: FunctionComponent = () => {
     if (cubeRef.current) {
       cubeRef.current.scale.set(zoom.value, zoom.value, zoom.value);
     }
+    if (edgesRef.current) {
+      edgesRef.current.scale.set(zoom.value, zoom.value, zoom.value);
+    }
   }, [zoom.value]);
 
   useEffect(() => {
     if (cubeRef.current) {
       cubeRef.current.rotation.x = rotationX.value;
       cubeRef.current.rotation.y = rotationY.value;
+    }
+    if (edgesRef.current) {
+      edgesRef.current.rotation.x = rotationX.value;
+      edgesRef.current.rotation.y = rotationY.value;
     }
   }, [rotationX.value, rotationY.value]);
 
