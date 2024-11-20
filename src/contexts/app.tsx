@@ -1,6 +1,6 @@
 import { h, createContext, FunctionComponent } from 'preact';
 import { useContext } from 'preact/hooks';
-import { signal, useSignal } from '@preact/signals';
+import { useSignal } from '@preact/signals';
 
 interface AppContextType {
   color: ReturnType<typeof useSignal<string>>;
@@ -13,16 +13,7 @@ interface AppContextType {
   setRotationY: (val: number) => void;
 }
 
-const AppContext = createContext<AppContextType>({
-  color: signal('#ffffff'),
-  zoom: signal(2),
-  rotationX: signal(0),
-  rotationY: signal(0),
-  setColor: () => {},
-  setZoom: () => {},
-  setRotationX: () => {},
-  setRotationY: () => {},
-});
+const AppContext = createContext<AppContextType>(undefined);
 
 export const useApp = () => {
   return useContext(AppContext);

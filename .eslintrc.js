@@ -1,26 +1,33 @@
 module.exports = {
-  extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:preact/recommended",
-  ],
-  env: {
-    browser: true,
-    es6: true,
-    jest: true,
-  },
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
-    sourceType: "module",
   },
-  plugins: ["preact", "@typescript-eslint"],
-  rules: {},
+  settings: {
+    react: {
+      pragma: 'h',
+      version: 'detect',
+    },
+    preact: {
+      pragma: 'h',
+    },
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:preact/recommended',
+    'plugin:prettier/recommended',
+  ],
+  ignorePatterns: [
+    "build/"
+  ],
+  plugins: ['preact', '@typescript-eslint', 'prettier'],
+  rules: {
+    'prettier/prettier': 'error',
+    // Add custom rules here
+  },
 };
