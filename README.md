@@ -10,6 +10,10 @@ This is a basic 3D Product Configurator using Preact and Three.js that allows us
 - State management using @preact/signals
 - Unit tests using Jest
 
+## Requirements
+
+Node: <= 20.9.0
+
 ## Setup Instructions
 
 1. Clone the repository:
@@ -52,7 +56,6 @@ This is a basic 3D Product Configurator using Preact and Three.js that allows us
   ![image](https://github.com/user-attachments/assets/2ed65d55-9e96-4b09-ae1e-cf6fc38d609a)
 - Use the color picker at the bottom right to change the color of the 3D model.
   ![image](https://github.com/user-attachments/assets/f9f1130b-a566-491c-9767-0097885eebc6)
-
 
 ## License
 
